@@ -1,0 +1,32 @@
+{
+    "version": 2,
+    "framework": null,
+    "builds": [
+        {
+            "src": "/public/index.php",
+            "use": "vercel-php@0.6.0"
+        },
+        {
+            "src": "/public/build/**",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(build/.*)",
+            "dest": "/public/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/public/index.php"
+        }
+    ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://project-web-portofolio.vercel.app",
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": "database/database.sqlite",
+        "APP_KEY": "base64:YOUR_APP_KEY_HERE"
+    }
+}
