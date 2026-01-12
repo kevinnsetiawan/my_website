@@ -3,17 +3,21 @@
     "framework": null,
     "builds": [
         {
-            "src": "/public/index.php",
+            "src": "public/index.php",
             "use": "vercel-php@0.6.0"
         },
         {
-            "src": "/public/build/**",
+            "src": "public/build/**",
             "use": "@vercel/static"
         }
     ],
     "routes": [
         {
-            "src": "/(build/.*)",
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/(favicon.ico|robots.txt|css/.*|js/.*|images/.*)",
             "dest": "/public/$1"
         },
         {
@@ -23,10 +27,9 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://project-web-portofolio.vercel.app",
         "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": "database/database.sqlite",
-        "APP_KEY": "base64:YOUR_APP_KEY_HERE"
+        "DB_DATABASE": "database/database.sqlite"
     }
 }
