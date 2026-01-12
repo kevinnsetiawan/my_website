@@ -1,6 +1,8 @@
 {
     "version": 2,
     "framework": null,
+    "buildCommand": "composer install --no-dev --optimize-autoloader && npm install && npm run build",
+    "outputDirectory": "public",
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.6.0"
@@ -12,18 +14,25 @@
             "dest": "/public/build/$1"
         },
         {
-            "src": "/(favicon.ico|robots.txt|css/.*|js/.*|images/.*|storage/.*)",
+            "src": "/(favicon\\.ico|robots\\.txt)",
             "dest": "/public/$1"
         },
         {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
+            "src": "/(css|js|images|storage)/(.*)",
+            "dest": "/public/$1/$2"
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/api/index.php"
         }
     ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://project-web-portofolio.vercel.app",
+        "APP_KEY": "base64:YOUR_APP_KEY_HERE",
         "DB_CONNECTION": "sqlite",
         "DB_DATABASE": "database/database.sqlite",
         "APP_CONFIG_CACHE": "/tmp/config.php",
@@ -34,6 +43,8 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie"
+        "SESSION_DRIVER": "cookie",
+        "SESSION_FILES": "/tmp/sessions",
+        "FILESYSTEM_DISK": "local"
     }
 }
