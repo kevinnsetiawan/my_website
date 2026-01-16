@@ -22,6 +22,12 @@
             "dest": "/$1/$2"
         }
     ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/api/index.php"
+        }
+    ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
